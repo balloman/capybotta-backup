@@ -1,7 +1,10 @@
-﻿FROM mcr.microsoft.com/dotnet/runtime:5.0 AS base
+﻿FROM mcr.microsoft.com/dotnet/runtime:6.0 AS base
 WORKDIR /app
 
-FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+RUN apt update
+RUN apt install -y ffmpeg
+RUN apt install -y libsodium-dev
 WORKDIR /src
 COPY ["CapybottaBot/CapybottaBot.csproj", "CapybottaBot/"]
 RUN dotnet restore "CapybottaBot/CapybottaBot.csproj"
